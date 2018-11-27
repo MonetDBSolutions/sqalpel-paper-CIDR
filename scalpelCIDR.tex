@@ -715,7 +715,6 @@ all results of the projects they are members of. There is no upper limit on the 
 
 %Database management systems are often used as the motor behind BigData solutions. 
 A long standing complication is that many of the software licenses are seemingly extremely restrictive when it comes to sharing experiences on their use. To quote a typical clause in a End-User-License of a commercial product:
-
 \emph{ You must obtain Microsoft's prior written approval to disclose to a third party the results of any benchmark test of the software.}
 
 %Just imagine that we forbid consumer organisations to evaluate products on their pro- and cons and report in public.
@@ -733,21 +732,34 @@ A long standing complication is that many of the software licenses are seemingly
 %Long legal battles may result where company A sues company B from using trade secrets.  Clearly a battle between manufacturers, but never between manufacturer and the customer. In all such cases it concerns re-implementation of an invention with the goal of economic profit.
 %It should not affect the intended use of a DBMS for the user. Performance is just one ingredient in the decision what to use. License cost, functionality and company skill sets are equally important. 
 %Actually the license fee covers the cost to use the DBMS chosen.
-It is time to throw away the fear to publish experiences with commercial products.
-This does not mean one should bash a product, because this
-could lead to a lawsuit on damaging the vendors' credentials.
-Instead, the sharing should be based on scientific rigor and aimed towards innovation~\cite{DBLP:conf/sigmod/RaasveldtHGM18}.
+{\bf It is time to throw away the fear to publish experiences with
+commercial products.  This does not mean one should bash a product,
+because this could lead to a lawsuit on damaging the vendors'
+credentials.}  Instead, the sharing should be based on scientific rigor
+and aimed towards innovation~\cite{DBLP:conf/sigmod/RaasveldtHGM18}.
 %Most important, any implementation of a performance project calls for scientific rigor. 
 In particular, the documentation of the DBMS knobs, the database schema meta data, e.g. index use, partitioning, compression,.. the data distribution, just to name a few.
 
-Although users are free to bind themselves in such limiting contracts, the repercussions on violation of the "deWitt" clause has, to my knowledge, not been tested extensively in court.\footnote{https://academia.stackexchange.com/questions/28511/has-the-dewitt-clause-which-prevents-researchers-for-publishing-db-benchmarks-e, http://www.itprotoday.com/microsoft-sql-server/devils-dewitt-clause}
-Furthermore, the Copyright Laws (in the US) permit "fair use" for research:  
-"In many jurisdictions, copyright law makes exceptions to these restrictions when the work is copied for the purpose of commentary or other related uses."~\footnote{https://en.wikipedia.org/wiki/Copyright}
 
-We belief that the open-source legal framework of Github~\footnote{https://github.com/github/site-policy/}, backed by the {\sc SQALPEL} access control policies, strikes a balance between public and confidential information.
-If a vendor beliefs a project infringes on their license, they can follow the
-\emph{notice and take down}  method, which is a process operated by an online host
-in response to court orders or allegations that content is illegal. Content is removed by the host following notice.
+{\bf Although users are free to bind themselves in such limiting contracts, the repercussions on violation of the "deWitt" clause has, to my knowledge, not been tested extensively in court.\footnote{https://academia.stackexchange.com/questions/28511/has-the-dewitt-clause-which-prevents-researchers-for-publishing-db-benchmarks-e, http://www.itprotoday.com/microsoft-sql-server/devils-dewitt-clause}
+Furthermore, the Copyright Laws (in the US) permit "fair use" for research:  
+"In many jurisdictions, copyright law makes exceptions to these restrictions when the work is copied for the purpose of commentary or other related uses."~\footnote{https://en.wikipedia.org/wiki/Copyright}}
+
+{\em <Panos>: I propose we change the bold text in the two paragraphs
+  above with the following: ``We believe that these restrictions are
+  fundamentally incompatible with the essence of the scientific
+  process. This is a discussion that needs to take place as a matter
+  of some urgency in scientific, legal and commercial fora. One of the
+  goals of this paper is to open such a discussion.''}
+
+We believe that the open-source legal framework of
+Github~\footnote{https://github.com/github/site-policy/}, backed by
+the {\sc SQALPEL} access control policies, strikes a balance between
+the need for public and confidential information.  If a vendor
+believes a project infringes on their license, they can follow the
+\emph{notice and take down} method, which is a process operated by an
+online host in response to court orders or allegations that content is
+illegal. Content is removed by the host following notice.
 %Or restrict information to team is allowed to exercise a system and is forced to maintain business secrecy.
 
 

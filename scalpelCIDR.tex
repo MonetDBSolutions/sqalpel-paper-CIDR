@@ -30,6 +30,15 @@
 \usepackage{wrapfig}
 \setlength{\wrapoverhang}{0mm}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO Notes for annotations.         %
+% Use final to not have them show up. %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{todonotes}
+\usepackage{marginnote} 
+\let\marginpar\marginnote
+
 %\newtheorem{theorem}{Theorem}
 %\newtheorem{lemma}[theorem]{Lemma}
 %\newtheorem{definition}{Definition}
@@ -118,6 +127,7 @@ process to obtain results for publication.
 %5OLTP-bench ~{oltpbench} is the most mature open-source project to embark on such an analysis.
 %It is strongly focused on multi-client interaction and combines fifteen different benchmarks
 \begin{figure}[t]
+\todo{Where does this table come from? Should ``Action Vector'' be ``Actian Vectorwise''?} 
 {\small 	\begin{tabular}{ | l | l |l | l |}\hline
 		benchmark &   reports & systems reported\\\hline
 		TPC-C &  368 & Oracle, IBM DB2, Sybase, \\
@@ -147,8 +157,10 @@ process to obtain results for publication.
 \end{figure}
 
 %Context of problem addressed
-In a product development setting, benchmarks provide a yardstick for regression testing.
-Each new DBMS version or deployment on a new hardware platform ideally shows a better performance.  
+
+In a product development setting, benchmarks provide a yardstick for
+regression testing.  Each new DBMS version or deployment on a new
+hardware platform ideally shows a better performance.
 %In addition, commercial vendors have a large quality assurance team that can study and leverage the workload of key customers to guard against dissatisfied users~\{dbtest}. 
 %However, designing a new high-performance database system from scratch is cumbersome. A proof of superior performance on a subset of a TPC-H may be countered by lack of functionality in many other parts. Or worse, a biased use of TPC-H to show how a new system excels or to invent one's own (micro) benchmark to prove a point thereby neglecting the often richer functionality of the systems compared with. 
 %The same holds for improvements on open-source database systems.  

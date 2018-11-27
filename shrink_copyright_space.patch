@@ -1,0 +1,11 @@
+--- cidr-2019.cls.ORG	2018-08-22 16:11:58.840360337 +0200
++++ cidr-2019.cls	2018-08-22 16:14:08.876452257 +0200
+@@ -1033,7 +1033,7 @@
+ \begin{center}
+ \setlength{\unitlength}{1pc}
+ \ifnum\ACM@basesize=9
+-\begin{picture}(20,6) %Space for copyright notice
++\begin{picture}(20,3) %Space for copyright notice
+ \put(0,-0.95){\crnotice{\@toappear}}
+ \end{picture}
+ \fi

@@ -41,6 +41,13 @@
 %\newtheorem{theorem}{Theorem}
 %\newtheorem{lemma}[theorem]{Lemma}
 %\newtheorem{definition}{Definition}
+
+\hyphenation{data-base}
+
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\dbltopfraction}{1.0}
  
 \begin{document}
 
@@ -68,7 +75,7 @@
 
 %}
 \maketitle
-\date{}
+%\date{}
 %\tableofcontents
 
 \begin{abstract}
@@ -109,7 +116,7 @@ experiences.
 
 %standard benchmarks
 Standard benchmarks have long been a focal point in business to aid
-customers to make an informed decision about a products' expected
+customers to make an informed decision about a product's expected
 performance. The Transaction Processing Counsel currently supports
 several benchmarks ranging from OLTP to IoT. An overview of their
 active set is shown in Table~\ref{table:tpc-overview}. Surprisingly,
@@ -129,21 +136,17 @@ publication.
 %Alternatively, new benchmarks frameworks are defined to study a particular functionality.
 %5OLTP-bench ~{oltpbench} is the most mature open-source project to embark on such an analysis.
 %It is strongly focused on multi-client interaction and combines fifteen different benchmarks
-\begin{figure}[t]
+\begin{table}[t]
   %pdfcomment{Panos: Should Action Vector be  Actian Vectorwise?}
-  {\small \begin{tabular}{ | l | l |l | l |}
+  {\small\addtolength{\tabcolsep}{-2.6pt}\begin{tabular*}{\columnwidth}{ | l | l | p{.55\columnwidth} |}
       \hline
       benchmark & reports & systems reported\\
       \hline
-      TPC-C & 368 & Oracle, IBM DB2, Sybase, \\
-      & &MS SQLserver, SymfoWARE\\
+      TPC-C & 368 & Oracle, IBM DB2, MS SQLserver, Sybase, SymfoWARE\\
       TPC-DI &0 &\\
       TPC-DS &1 & Intel\\
       TPC-E &77 & MS SQLserver\\
-      TPC-H$<$ SF-1000 & 252 &MS SQLserver, Oracle, \\
-      & &EXASOL, Action Vector 5.0, \\
-      & &Sybase, IBM DB2, Informix,\\
-      & & Teradata, Paraccel\\
+      TPC-H $\leq$ SF-300 & 252 &MS SQLserver, Oracle, EXASOL, Action Vector 5.0, Sybase, IBM DB2, Informix, Teradata, Paraccel\\
       TPC-H SF-1000 & 4 & MS SQLserver, \\
       TPC-H SF-3000 & 6 & MS SQLserver, Actian Vector 5.0\\
       TPC-H SF-10000 & 9 & MS SQLserver \\
@@ -154,9 +157,9 @@ publication.
       TPCx-HS &0 &\\
       TPCx-IoT & 1& Hbase\\ %TPCx-V & & 0thers\\ %TPC-Energy & & & see others\\ %TPC-Pricing & 2005& &see others\\
       \hline
-    \end{tabular}
-    \caption{TPC benchmarks\label{table:tpc-overview}}}
-\end{figure}
+    \end{tabular*}}
+    \caption{TPC benchmarks\label{table:tpc-overview}}
+\end{table}
 
 %Context of problem addressed
 
@@ -182,7 +185,7 @@ However, after almost four decades of database
 performance assessments the state of affairs can be summarized as
 follows: 1) standard benchmarks are good in underpinning technical
 innovations, 2) standard benchmarks are hardly representative for
-real-life workloads\cite{DBLP:conf/sigmod/VogelsgesangHFK18}, and 3)
+real-life workloads~\cite{DBLP:conf/sigmod/VogelsgesangHFK18}, and 3)
 most benchmarking results are kept private unless it is a success
 story.
 
@@ -221,7 +224,7 @@ sharing code. A hurdle to include product results is the ``deWitt''
 clause in most end-user-license agreements, which seemingly prohibits
 publishing benchmark results for study and research, commentary, and
 professional
-advice~\footnote{https://academia.stackexchange.com/questions/28511/has-the-dewitt-clause-which-prevents-researchers-for-publishing-db-benchmarks-e}
+advice\footnote{https://academia.stackexchange.com/questions/28511/has-the-dewitt-clause-which-prevents-researchers-for-publishing-db-benchmarks-e}
 and which is, in our laymen's opinion, certainly not 
 %pdfcomment{Panos: I am not sure we are qualified to make judgements on the intentions of the Copyright Law. In any case, as we claim later this has not been tested in a Court.}
 intended by the Copyright Laws\footnote{https://en.wikipedia.org/wiki/Copyright} for sharing consumer research information.
@@ -239,7 +242,7 @@ at large?
 %contribution of the paper
 %extend grammar based testing towards benchmarking
 {\bf Contributions.} In the remainder of this paper we introduce {\sc
-  SQALPEL}, a SaaS solution to develop and archive performance
+  sqalpel}, a SaaS solution to develop and archive performance
 projects.
 %The query space is captured by a domain specific language, specific to the application queries.
 %to aid in finding performance pitfalls using discriminative queries, i.e.\ query pairs with a small
@@ -317,7 +320,7 @@ research community.
  
 
 {\bf Outline.} In the remainder of this paper we focus on the design
-of {\sc sqalpel}. Section~\ref{Backgound} outlines related work. In
+of {\sc sqalpel}. Section~\ref{Background} outlines related work. In
 Section~\ref{overview} we give an overview of the performance
 benchmark generation. Section~\ref{sharing} addresses access control
 and legalities. Section~\ref{demo} summarizes the demo being
@@ -367,36 +370,36 @@ runs. Unlike randomized testing and genetic processing, {\sc sqalpel} guides the
 system through the search space by morphing the queries in a stepwise
 fashion.
 
-Unlike work on compiler technology
-~\cite{McKeeman98differentialtesting}, the grammar based
+Unlike work on compiler technology~\cite{McKeeman98differentialtesting},
+the grammar based
 experimentation in the database arena is hindered by the relatively
 high cost of running a single experiment. Some preliminary work has
-been focused on generating test data with enhanced context-free
+focused on generating test data with enhanced context-free
 grammars~\cite{10.1007/978-3-319-11245-9_19} or based on user defined
 constraints in the intermediate
-results~\cite{Binnig:2007:QGQ:1247480.1247520}. A seminal work is
-\cite{DBLP:conf/vldb/Slutz98}, where massive stochastic testing of
+results~\cite{Binnig:2007:QGQ:1247480.1247520}. A seminal work
+is~\cite{DBLP:conf/vldb/Slutz98}, where massive stochastic testing of
 several SQL database systems was undertaken to improve their
 correctness.
 
 A mature recent framework to consider performance analysis of OLTP
-workloads is described in \cite{DBLP:journals/pvldb/DifallahPCC13}. It
+workloads is described in~\cite{DBLP:journals/pvldb/DifallahPCC13}. It
 integrates a handful of performance benchmarks and provides visual
 analytic tools to assess the impact of concurrent workloads. It
 relies on the JDBC interface to study mostly multi-user interaction
 with the target systems. It is a pity that over 150 project forks
-reported on Github OLTPbenchmark prject~\footnote{https://github.com/oltpbenchmark}.
+reported on Github OLTPbenchmark project\footnote{https://github.com/oltpbenchmark}.
 %pdfcomment{Panos: we need a footnote with a URL here},
 have not yet resulted in a similar number of publicly accessible
 reports to increase community insight.
 
 The urgency and need for a platform to share performance data about
-products can be illustrated further with the recently started EU project DataBench \footnote{https://www.databench.eu},
+products can be illustrated further with the recently started EU project DataBench\footnote{https://www.databench.eu},
 which covers a brought area of performance benchmarking,
-and finished EU project Hobbit\footnote{ https://project-hobbit.eu}, which focussed on benchmarking RDF stores.  
+and finished EU project Hobbit\footnote{https://project-hobbit.eu}, which focused on benchmarking RDF stores.  
 %The problem of large execution times can be alleviated somewhat
 %nowadays, by using distributed experimentation platforms like
-%ACTiCLOUD\footnote{\url{http://www.acticloud.eu/}}, where
+%ACTiCLOUD\footnote{http://www.acticloud.eu/}, where
 %differentiation of database-as-a-service is one of the key targets.
 
 %Furhtermore, {\sc sqalpel} is not focused on the source code coverage, but aims for a much tighter goal. Finding a few tests that show major performance differences."Prior art in grammar-based testing uses stochastic test-data generation(e.g., [19, 20, 23]). The canonical approach is to annotate a grammar with probabilistic weights on the productions and other hints. A test-data set is then generated using probabilistic production selection and potentially further heuristics. Stochastic approaches have been successfully applied to practical problems. We note that this approach requires that coverage claims are based on stochastic arguments" Microsoft paper "Controllable combinatorial coverage in grammar-based testing" Controllable combinatorial coverage in grammar-based testingRalf Lammel and Wolfram Schulte \{10.1007/11754008_2}focuses on...
@@ -410,21 +413,21 @@ In this section we briefly describe our approach to find
 discriminative queries based on user-supplied sample queries from
 their envisioned application setting. We focus on the specification
 of experiments and running them against target systems. Further
-details can be found in \cite{DBLP:conf/sigmod/KerstenKZ18}.
+details can be found in~\cite{DBLP:conf/sigmod/KerstenKZ18}.
 
 \subsection{Query space grammar}\label{specification}
 The key to any {\sc sqalpel} performance project is a domain specific
 language $G$ to specify a query (sub) space. All sentences in the
 language derived, i.e.\ $L(G)$, are candidate experiments to be run
-against target system(s). Figure
-\ref{fig:script1} illustrates a query space grammar with seven rules.
+against target system(s). Figure~\ref{fig:script1}
+illustrates a query space grammar with seven rules.
 Each grammar rule is identified by a name and contains a number of
 alternatives, i.e.\ free-format sentences with \textit{embedded
   references} to other rules using an EBNF-like encoding.
 % (Table \ref{table:tagstructure}). 
 %The text can span multiple lines using a backslash as the line continuation.
 %The leading and trailing white-space on each line are ignored while producing the final sentence. %Otherwise all text appear literally in the final query formulation.
-%\begin{figure}
+%\begin{table}
 %	\begin{tabular}{ | l  l |}\hline
 %		\$\{Tag\} & a sentence derived from Tag\\
 %		\$\{Tag\}*& an optional repeated sentence \\
@@ -434,7 +437,7 @@ alternatives, i.e.\ free-format sentences with \textit{embedded
 		%%		\\
 %		\hline		\end{tabular}
 %	\caption{Tag syntax and semantics\label{table:tagstructure}}
-%\end{figure}
+%\end{table}
 % Normalization
 The {\sc sqalpel} syntax is designed to be a concise, readable
 description for the user. Internally, the grammar is normalized by
@@ -465,7 +468,7 @@ l_count:
 l_filter: 
    WHERE n_name= 'BRAZIL'
 \end{verbatim}
-	\caption{Sample {\sc sqalpels} grammar \label{fig:script1}}
+	\caption{Sample {\sc sqalpel} grammar \label{fig:script1}}
 \end{figure}
 
 % how to generate sentence
@@ -500,7 +503,7 @@ grammar.
 % Consider the term  'P1 and P2' this is translated into a rule with 3 alternatives
 
 %Guidance on grammar construction
-%\subsection{Scalpel grammar derivation}
+%\subsection{Sqalpel grammar derivation}
 %A {\sc sqalpel} grammar is intended to reflect the users' application setting.
 %For research purposes we generalize existing benchmarks to
 %cover a much larger spectrum of valid queries. For example, we can take TPC-H
@@ -620,11 +623,11 @@ in highly complex queries.
 
 % try to create a more informative version
 % researchers can deploy it to aid
-In \cite{DBLP:conf/sigmod/KerstenKZ18} the TPC-H benchmark was
+In~\cite{DBLP:conf/sigmod/KerstenKZ18} the TPC-H benchmark was
 revisited to assess how large the search space becomes when the SQL
 queries are converted automatically into a {\sc sqalpel} grammar. The
 number of queries derived from them vary widely, see
-Figure~\ref{table:tpch-count}.
+Table~\ref{table:tpch-count}.
 %Recall that each template still should be filled with a choice from the literals to generate a query.
 %Nested queries with compound predicates, e.g.\ Q2, Q7, Q19, lead to an explosion of alternatives. 
 This is to be expected, because the grammar produced contains sets of
@@ -641,7 +644,7 @@ the project into an area where discriminative queries are expected
 (See Figure~\ref{fig:querypool2}). Finally, the number of query
 templates derived from a grammar is capped using a hard system limit.
 %pdfcomment{Panos: How is the number capped? Who controls this?}.
-\begin{figure}[t]
+\begin{table}[t]
 {\small \begin{tabular}{ | l r r | l r r |}\hline tag & templates &
     space & tag & templates & space\\\hline Q1 & 40 & 9207 & Q12 &
     8484 & 162918 \\ Q2 & 58160 & 6354837405 & Q13 & 16 & 81\\ Q3 &
@@ -654,7 +657,7 @@ templates derived from a grammar is capped using a hard system limit.
 	\end{tabular}
 	\caption{TPC-H query space from
           \cite{DBLP:conf/sigmod/KerstenKZ18}\label{table:tpch-count}}}
-\end{figure}
+\end{table}
 
 \subsection{Running experiments}
 % Global goals
@@ -662,18 +665,19 @@ templates derived from a grammar is capped using a hard system limit.
 %For there are privacy and technical concerns involved.
 
 %privacy concerns
-Once a {\sc sqalpel} project is defined, people can contribute results
-using their own DBMS infrastructure using the {\sc sqalpel.py}
-program. This small Python program contains the logic to call the
+Once a {\sc sqalpel} project is defined, people can use the 
+{\tt sqalpel.py} program to contribute results
+using their own DBMS infrastructure.
+This small Python program contains the logic to call the
 web-server, requesting a query from the pool and to report back the
 performance results. It comes with some DBMS client API drivers, but
 any JDBC enhanced database system can be used directly.
 
 The experiment driver is locally controlled using a configuration
 file. It specifies the DBMS and host used in the experimental run and
-the project contributed to. Furthermore, it uses a key
-supplied separately to identify the source of results later on without
-disclosing the contributors' identity.
+the project contributed to. Furthermore, it uses a separately supplied key
+to identify the source of the results without
+disclosing the contributor's identity.
 
 By default each experiment is run five times and the wall clock time
 for each step is reported. When available, the system load at the
@@ -728,7 +732,7 @@ solutions.
 
 \subsection{Design considerations}
 The starting point of the design for {\sc
-SQALPEL} is to recognize that performance data only makes sense if
+sqalpel} is to recognize that performance data only makes sense if
 you can easily document it and share it. 
 This immediately takes TPC benchmarking outside the realm of where it is used nowadays mostly, i.e.\ a
   by-product to finalize a scientific paper to prove a point. Every
@@ -752,7 +756,7 @@ collaborative teams as well.
 
 \subsection{Access control in SQALPEL}
 This leads to a clear distinction of the kinds of projects that {\sc
-  SCALPEL} is designed to accommodate, i.e.\ public and/or private
+  sqalpel} is designed to accommodate, i.e.\ public and/or private
 ones, with access control.
 Much like how software projects are managed on Github. 
 
@@ -843,9 +847,9 @@ credentials.
 
  Although users are free to bind themselves in such limiting
  contracts, the repercussions on violation of the ``deWitt'' clause
- has, to our knowledge, not been tested extensively in
+ have, to our knowledge, not been tested extensively in
  court.\footnote{https://academia.stackexchange.com/questions/28511/has-the-dewitt-clause-which-prevents-researchers-for-publishing-db-benchmarks-e,
-   http://www.itprotoday.com/microsoft-sql-server/devils-dewitt-clause}
+   http://www.itprotoday.com/microsoft-sql-server/devils-dewitt-clause}.
  Furthermore, the Copyright Laws (in the US) permit ``fair use'' for
  research: ``In many jurisdictions, copyright law makes exceptions to
  these restrictions when the work is copied for the purpose of
@@ -855,7 +859,7 @@ credentials.
 %pdfcomment{Panos: I propose we change the bold text in the two
 
 We believe that the open-source legal framework of
-Github~\footnote{https://github.com/github/site-policy/}, backed by
+Github\footnote{https://github.com/github/site-policy/}, backed by
 the {\sc sqalpel} access control policies, strikes a balance between
 the need for public and confidential information. If a vendor believes
 a project infringes on their license, they can follow the \emph{notice
@@ -924,6 +928,8 @@ JavaScript for interactive manipulation.
 The session state is kept within the server and is considered global
 within a browser.
 
+\pagebreak
+
 \subsection{Top menu navigation}
 The top level menu is kept simple. A straightforward user
 administration is provided based on an unique nickname and a valid
@@ -948,14 +954,14 @@ project is opened or a new one started. Its synopsis contains all
 information to repeat the experiments, provides proper attribution to
 the database generator developers, and marks the project as either
 public/ private. An experiment consists of a sample SQL query
-converted into a scalpel grammar (see Figure ~\ref{fig:scalpel}). In
+converted into a {\sc sqalpel} grammar (see Figure~\ref{fig:sqalpel}). In
 case the grammar produces too many semantic incorrect queries or leads
 to exorbitant large space, a manual edit of the grammar is called
 for, e.g. some alternatives can be removed by making join-paths
 explicit.
 
 \subsection{Query pool}
-With the scalpel grammar in place we can switch to the query pool
+With the {\sc sqalpel} grammar in place we can switch to the query pool
 (Figure~\ref{fig:querypool2}). It is initialized with the baseline
 query.
 %This way we always first get an overview of the traditional benchmark results. 
@@ -970,7 +976,7 @@ experiments.
 
 \subsection{Contributing results}
 With a pool of queries in place, we can invite contributors to provide
-actual performance data. They use the {\sc sqalpel.py} experiment
+actual performance data. They use the {\tt sqalpel.py} experiment
 driver. Its basic interaction is to call the {\sc sqalpel} webserver
 for a task from a project/ experiment pool, execute it, and report the
 findings. The contributor is in full control over the target platform
@@ -987,7 +993,7 @@ results.
 Each query is ran against a single DBMS + host combination. The
 execution status is tracked in a queue, which enables killing queries
 that got stuck or when the results of an experiment are not delivered
-in after a specified timeout interval.
+within a specified timeout interval.
 
 All raw results are collected in a results table for off-line
 inspection. One particular use case is to remove results from target
@@ -996,6 +1002,8 @@ It is often a better strategy to keep these results private until
 sufficient clarification has been obtained from the contributor.
 %The SQLprobe program continually picks up tasks until it is stopped by the contributor
 %or reaches a timeout, or bumps upon a resource limit or errors encountered.
+
+\pagebreak
 
 \subsection{Visual analytics}
 
@@ -1024,7 +1032,7 @@ of the lexical terms in the queries may indicate
 costly ones (see Figure~\ref{fig:components}). For instance, the
 dominant term in Q1
 %pdfcomment{What is Q1? TPC-H if so, we should say so explicitly, or even better we should write the whole query out.}
-for a MonetDB installation is:
+for MonetDB is:
 \begin{verbatim}
    sum(l_extendedprice*(1 - l_discount) * 
    (1 + l_tax)) as sum_charge
@@ -1036,7 +1044,7 @@ materialized intermediates.
 % The component breakdown illustrates this more clearly as shown in Figure~\ref{fig:components}.
 
 Relative speedup between different versions of a system can be
-directly visualized (Figure ~\ref{fig:speedup2}). It should not come
+directly visualized (Figure~\ref{fig:speedup2}). It should not come
 as a surprise that speedup factors of an individual query only tells
 part of the story. The figure shows that the base line query SF 1
 Q1
@@ -1096,9 +1104,9 @@ focus experimentation and engineering.
 \begin{figure*}[t!]
   %pdfcomment{Panos: The figures are really difficult to read and make sense of. If we have the option, maybe we should send an appendix with higher definition screenshots.}
   \centering
-  \includegraphics[width=5in]{Figures/scalpel2.png}
-  \caption{Query scalpel
-    \label{fig:scalpel}}
+  \includegraphics[width=.807\textwidth]{Figures/scalpel2.png}
+  \caption{Query {\sc sqalpel}
+    \label{fig:sqalpel}}
 \end{figure*}
 
 
@@ -1111,21 +1119,21 @@ focus experimentation and engineering.
 
 \begin{figure*}[t!]
 \centering
-\includegraphics[width=5in]{Figures/querypool2.png}
+\includegraphics[width=.807\textwidth]{Figures/querypool2.png}
 \caption{Query pool
 	\label{fig:querypool2}}
 \end{figure*}
 
 \begin{figure*}[t!]
 \centering
-\includegraphics[width=5in]{Figures/history2.png}
+\includegraphics[width=.807\textwidth]{Figures/history2.png}
 \caption{Experiment history
 	\label{fig:history}}
 \end{figure*}
 
 \begin{figure*}[t!]
 \centering
-\includegraphics[width=5in]{Figures/components2.png}
+\includegraphics[width=.807\textwidth]{Figures/components2.png}
 \caption{Principle components
 	\label{fig:components}}
 \end{figure*}
@@ -1139,14 +1147,14 @@ focus experimentation and engineering.
 
 \begin{figure*}[t!]
 \centering
-\includegraphics[width=5in]{Figures/speedup3.png}
+\includegraphics[width=.807\textwidth]{Figures/speedup3.png}
 \caption{Query speedup
 	\label{fig:speedup2}}
 \end{figure*}
 
 \begin{figure*}[t!]
 \centering
-\includegraphics[width=5in]{Figures/compare2.png}
+\includegraphics[width=.807\textwidth]{Figures/compare2.png}
 \caption{Query differentials
 	\label{fig:differential}}
 \end{figure*}
@@ -1173,7 +1181,7 @@ focus experimentation and engineering.
 %We have been given the opportunity to run the experiments reported by Clickhouse on their original data. The prime reason was to validate ~\footnote{The times for MonetDB relate to an ancient version, beginning of 2013} the reported performance on their website and to understand what queries in their application space caused the huge performance differences. The query set consists of just 43 queries picked randomly by hand from their application setting, i.e.\ web-log analysis.
 
 %To challenge {\sc sqalpel} we simply combined all the queries into one big grammar. It already showed that the benchmark was using only 34 out of 104 columns of their database table. Furthermore, as few as 19 predicate terms where used to filter out records and 16 columns were used to group information.
-%The grammar analysis leads to 14K different query templates and the complete space of $> ~ 10 ^{22}$ different queries. If their choice of 43 queries properly represents this space remains to be seen. One observation in deploying it with {\sc scalpel} showed that there are essentially two outstanding discriminative queries. In a hot database setting, MonetDB performs much better on point-queries, while it performed worst against Clickhouse when confronted by aggregation over a large number of small groups. Given the biased query distribution this results in a non-representative global comparison figure and provided insight on where to improve MonetDB.
+%The grammar analysis leads to 14K different query templates and the complete space of $> ~ 10 ^{22}$ different queries. If their choice of 43 queries properly represents this space remains to be seen. One observation in deploying it with {\sc sqalpel} showed that there are essentially two outstanding discriminative queries. In a hot database setting, MonetDB performs much better on point-queries, while it performed worst against Clickhouse when confronted by aggregation over a large number of small groups. Given the biased query distribution this results in a non-representative global comparison figure and provided insight on where to improve MonetDB.
 
 %\subsection{The real world}
 %Another driving example for {\sc sqalpel} was a problematic customer query. It was a typical BI query, generated by a front-end tool and heavily relying on expanding (inline) views. The result was a single SQL statement of $\sim$2K lines ($\sim$ 110 K characters), which included 68 subqueries, $>100$ (dis/con)junctive terms and much of the SQL functionality, i.e.\ group-by, order-by, case-expressions, window-based aggregates, casting, etc.
@@ -1213,8 +1221,12 @@ standing on the shoulders of giants.
 %Although {\sc sqalpel} has been initially designed for database query performance analysis, its generality permits any other system comparison to be undertaken as well. Running queries from a search space can readily be replaced by running parameterized scripts to study e.g.\ database loading, database update workloads, messaging systems, compilers, HPC applications, and user interaction scenarios.
 
 
-\subsection*{Acknowledgments} This research has received funding from the European Union's Horizon 2020 research and innovation programme under Grant Agreement no. 732366 (ACTiCLOUD).
+\subsection*{Acknowledgments} This research has received funding from the European Union's Horizon 2020 research and innovation programme under Grant Agreement no.~732366 (ACTiCLOUD).
 
-{\small \bibliography{refs} \bibliographystyle{plain} }
+{
+%\small	% see makePDF.sh
+\bibliography{refs}
+\bibliographystyle{abbrv}
+}
 %\printindex
 \end{document}

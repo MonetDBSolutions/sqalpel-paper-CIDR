@@ -1033,7 +1033,7 @@
 \begin{center}
 \setlength{\unitlength}{1pc}
 \ifnum\ACM@basesize=9
-\begin{picture}(20,6) %Space for copyright notice
+\begin{picture}(20,5) %Space for copyright notice
 \put(0,-0.95){\crnotice{\@toappear}}
 \end{picture}
 \fi

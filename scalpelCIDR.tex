@@ -117,7 +117,7 @@ experiences.
 %standard benchmarks
 Standard benchmarks have long been a focal point in business to aid
 customers to make an informed decision about a product's expected
-performance. The Transaction Processing Counsel currently supports
+performance. The Transaction Processing Counsel (TPC) currently supports
 several benchmarks ranging from OLTP to IoT. An overview of their
 active set is shown in Table~\ref{table:tpc-overview}. Surprisingly,
 the number of publicly accessible results remains extremely low. Just
@@ -131,7 +131,7 @@ publication.
 %Moreover, setting up a comparative benchmark for illustrative purposes with the rigor
 %as required by TPC is time consuming. 
 
-%To partly alleviate this situation, several projects can be found on Github that will
+%To partly alleviate this situation, several projects can be found on GitHub that will
 %install and run TPC benchmarks on open-source database systems.
 %Alternatively, new benchmarks frameworks are defined to study a particular functionality.
 %5OLTP-bench ~{oltpbench} is the most mature open-source project to embark on such an analysis.
@@ -158,7 +158,7 @@ publication.
       TPCx-IoT & 1& Hbase\\ %TPCx-V & & 0thers\\ %TPC-Energy & & & see others\\ %TPC-Pricing & 2005& &see others\\
       \hline
     \end{tabular*}}
-    \caption{TPC benchmarks\label{table:tpc-overview}}
+    \caption{TPC benchmarks (\url{http://www.tpc.org/})\label{table:tpc-overview}}
 \end{table}
 
 %Context of problem addressed
@@ -178,7 +178,7 @@ are as critical.
 In database research TPC-C and TPC-H are also commonly used to illustrate
 technical innovation. Partly because their description is easy to
 follow and the data generators easy to deploy.
-%However few researchers go all the way in patching e.g.\ Postgresql to benefit from new insights.
+%However few researchers go all the way in patching, e.g., Postgresql to benefit from new insights.
 
 % what is the state of affairs
 However, after almost four decades of database
@@ -201,7 +201,7 @@ predefined and frozen query set. For, consider two systems A and B, which may be
 different altogether or merely two versions of the same system. System
 B may be considered an overall better system, beating system A on all
 benchmarked TPC-H queries. This does not mean that no queries can be
-handled more efficiently in A. These queries might simply not be part
+handled more efficiently by A. These queries might simply not be part
 of the benchmark suite. Or the improvement is just obtained in the
 restricted cases covered by the benchmark.
 
@@ -237,7 +237,7 @@ at large?
 
 %recap of the solution
 %Since we are primarily interested in finding performance pitfalls situations we assume that the database %schema and data are available upfront. This can be a snapshot/ sample of a real-world database. For research %purposes it can be a TPC-H database at a given scale-factor. 
-%Either one is sufficient and provides the basis for more meaningful insights than a brute force approach against randomly generated data and queries as pursued by e.g.\ SQLsmith.
+%Either one is sufficient and provides the basis for more meaningful insights than a brute force approach against randomly generated data and queries as pursued by, e.g., SQLsmith.
 
 %contribution of the paper
 %extend grammar based testing towards benchmarking
@@ -245,7 +245,7 @@ at large?
   sqalpel}, a SaaS solution to develop and archive performance
 projects.
 %The query space is captured by a domain specific language, specific to the application queries.
-%to aid in finding performance pitfalls using discriminative queries, i.e.\ query pairs with a small
+%to aid in finding performance pitfalls using discriminative queries, i.e., query pairs with a small
 %edit-distance that exhibit substantially different performance behavior. To
 %steer the process, we start with sample SQL queries that are automatically
 %transformed into a large search space of related queries. In this way, we stay
@@ -277,7 +277,9 @@ grammar. Minor differences in syntax are easily accommodated using
 %why platform
 A complete software stack is needed to manage performance projects and
 to deal with sharing potentially confidential information. We are
-standing on the shoulders of Github in the way they provide such a
+standing on the shoulders of GitHub%
+\footnote{https://github.com/}
+in the way they provide such a
 service. This includes overall organization of projects and their
 legal structure to make a performance platform valuable to the
 research community.
@@ -330,7 +332,7 @@ presented.
 \section{Background}\label{Background}
 %Since the early days of database management systems, researchers have made it a
 %standard practice to compare the performance of their solution to that of their
-%peers using e.g.\ TPC-H.
+%peers using, e.g., TPC-H.
 % Although some industry-wide benchmarks are prevalent, there are companion
 %activities to consider in Software Engineering. DBMW benchmark history in a
 %few sentences
@@ -354,7 +356,7 @@ testing~\cite{10.1007/11754008_2,ZAMLI20111741} the predominant
 approach is to annotate a grammar with probabilistic weights on the
 productions. It is primarily used to generate test data geared at
 improved coverage tests for the target system,
-e.g. a compiler~\cite{10.1007/978-3-642-41707-8_2}, or to capture a user
+e.g., a compiler~\cite{10.1007/978-3-642-41707-8_2}, or to capture a user
 interaction with a web-based application. These approaches can be
 considered static and labor intensive, as they require the test
 engineer to provide weights and hints up front.
@@ -371,7 +373,7 @@ system through the search space by morphing the queries in a stepwise
 fashion.
 
 Unlike work on compiler technology~\cite{McKeeman98differentialtesting},
-the grammar based
+grammar based
 experimentation in the database arena is hindered by the relatively
 high cost of running a single experiment. Some preliminary work has
 focused on generating test data with enhanced context-free
@@ -388,12 +390,13 @@ integrates a handful of performance benchmarks and provides visual
 analytic tools to assess the impact of concurrent workloads. It
 relies on the JDBC interface to study mostly multi-user interaction
 with the target systems. It is a pity that over 150 project forks
-reported on Github OLTPbenchmark project\footnote{https://github.com/oltpbenchmark}.
+of the OLTPbenchmark project\footnote{https://github.com/oltpbenchmark}
+reported on GitHub
 %pdfcomment{Panos: we need a footnote with a URL here},
 have not yet resulted in a similar number of publicly accessible
 reports to increase community insight.
 
-The urgency and need for a platform to share performance data about
+The urgent need for a platform to share performance data about
 products can be illustrated further with the recently started EU project DataBench\footnote{https://www.databench.eu},
 which covers a brought area of performance benchmarking,
 and finished EU project Hobbit\footnote{https://project-hobbit.eu}, which focused on benchmarking RDF stores.  
@@ -418,11 +421,11 @@ details can be found in~\cite{DBLP:conf/sigmod/KerstenKZ18}.
 \subsection{Query space grammar}\label{specification}
 The key to any {\sc sqalpel} performance project is a domain specific
 language $G$ to specify a query (sub) space. All sentences in the
-language derived, i.e.\ $L(G)$, are candidate experiments to be run
+language derived, i.e., $L(G)$, are candidate experiments to be run
 against target system(s). Figure~\ref{fig:script1}
 illustrates a query space grammar with seven rules.
 Each grammar rule is identified by a name and contains a number of
-alternatives, i.e.\ free-format sentences with \textit{embedded
+alternatives, i.e., free-format sentences with \textit{embedded
   references} to other rules using an EBNF-like encoding.
 % (Table \ref{table:tagstructure}). 
 %The text can span multiple lines using a backslash as the line continuation.
@@ -480,23 +483,23 @@ injection of tokens that embody predicates, expressions, and other
 text snippets.
 
 Inspired by the observation that most query optimizers normalize
-expressions lists internally, we can ignore order too in the query
+expression lists internally, we can ignore order, too, in the query
 generation. It suffices to count the lexical tokens during template
-generation, e.g.\ the template \verb~SELECT ${l_column} FROM ${tables}~
+generation, e.g., the template \verb~SELECT ${l_column} FROM ${tables}~
 is derived from the grammar above and can be finalized by choosing a
 table and a column literal.
 
 %How many sentences.
 A naive interpretation of the grammar as a language generator easily
 leads to an extremely large set of queries. Especially when literal
-token are repeated or when a recursive grammar rule is provided.
+tokens are repeated or when a recursive grammar rule is provided.
 Therefore, we enforce that the literal tokens are used at most once in
 a query. This does not rule out that the same literal can be used
 multiple times. They are simply differentiated by their line number in the
 grammar.
 
 %The number of such templates is limited compared to all possible
-%queries. The grammar shown in Figure \ref{fig:script1} leads to 10 templates,
+%queries. The grammar shown in Figure~\ref{fig:script1} leads to 10 templates,
 %which can be used to generate 32 different queries.
 
 % details on how to generate code for projectionlists and operators.
@@ -523,7 +526,7 @@ considered literal tokens.
 %Of course, then dropping a table expression would leave the query semantically invalid.
 
 %For example, appendix \pageref{} contains a {\sc sqalpel} description derived from query 1 in the TPC-H benchmark. It is a coarse grain mapping, where we are interested in the impact of the projection list expressions. It leads to ZZZ query templates and $2^{16}$ unique queries when any combination of lexical tokens can be used only once.
-%The repository provided for {\sc sqalpel} contains a possible grammar for all the TPCH queries. The characteristics in terms of number of templates derived and size of the query space is illustrated in Table \ref{table:tpch-count}.
+%The repository provided for {\sc sqalpel} contains a possible grammar for all the TPCH queries. The characteristics in terms of number of templates derived and size of the query space is illustrated in Table~\ref{table:tpch-count}.
 %Running all queries becomes a challenge for the user's patience. Even if TPCH-Q1 runs within 4 seconds in a memory %bound setting, the complete experiment consumes about 70 hours.
 
 %Practice of grammar
@@ -533,7 +536,7 @@ to gradually increase the complexity of the baseline query. This way
 the combinatorial explosion of the language and subsequent work can be
 controlled.
 %Furthermore, a prudent grammar construction can avoid erroneous queries to a large extend by simply fusion of grammar rules into lexical tokens. 
-%For example, Figure \ref{fig:join} illustrates a grammar
+%For example, Figure~\ref{fig:join} illustrates a grammar
 %with a join term where the projection attributes only make sense in the context
 %of \verb~l_join~.
  %Unfortunately, merging results of an old grammar can not be
@@ -575,7 +578,7 @@ query pool. It is populated with the baseline query and some queries
 constructed from randomly choosen templates. Once a collection has
 been defined, we can extend the pool by morphing queries based on
 observed behavior. Three morphing strategies are considered:
-\emph{alter}, \emph{expand} and a \emph{pruning}.
+\emph{alter}, \emph{expand} and a \emph{prune}.
 
 %This guided generation of concrete queries based on previous versions allows us to attribute performance
 %differences to specific changes in terms of the SQL text, in contrast
@@ -629,7 +632,7 @@ queries are converted automatically into a {\sc sqalpel} grammar. The
 number of queries derived from them vary widely, see
 Table~\ref{table:tpch-count}.
 %Recall that each template still should be filled with a choice from the literals to generate a query.
-%Nested queries with compound predicates, e.g.\ Q2, Q7, Q19, lead to an explosion of alternatives. 
+%Nested queries with compound predicates, e.g., Q2, Q7, Q19, lead to an explosion of alternatives. 
 This is to be expected, because the grammar produced contains sets of
 alternative rules from which all subsets can be considered for template
 construction. This results in a combinatorial explosion of templates.
@@ -702,7 +705,7 @@ keep system specific performance indicators for post inspection.
 
 
 %independence queries
-%The execution of each query is considered an independent experiment. Its performance may be %impacted by the state of the DBMS, e.g.\ some tables could have been loaded or still reside on %disk. To cope with this situation, a prelude action can be fired to reset the target platform.
+%The execution of each query is considered an independent experiment. Its performance may be %impacted by the state of the DBMS, e.g., some tables could have been loaded or still reside on %disk. To cope with this situation, a prelude action can be fired to reset the target platform.
 
 % repeatable runs
 %To simplify this case, an experiment can be ran multiple times to obtain a best value seen. This way we approximate the minimal resources needed to solve the query. It forms a better point of reference when comparing two systems for their implementation differences. It also alleviates the need for a cold start of the database server.
@@ -715,18 +718,18 @@ keep system specific performance indicators for post inspection.
 %requirement is that the order and number of elements in both classes are
 %semantically identical. Although dialects solve most of the problems
 %encountered, it can not solve all syntax/lexical differences. In that case the
-%query grammar could be used to produce e.g.\ an abstract syntax tree and let the
+%query grammar could be used to produce, e.g., an abstract syntax tree and let the
 %driver script convert it into the concrete syntax required by the target system.
 
 % how to run parallel
-%Although a driver script can be as complicated as needed to cope with all the intricacies of a distributed setting, {\sc sqalpel} also provides a simple scheme to run experiments in parallel on multiple machines. It is denoted on the command line with a list of machines reachable using a {\sc ssh} connection with the users' credentials. Then all experiments are run in parallel lock-step mode over the ssh channels, i.e.\ all machines exercise the same experiment and a new experiment is only chosen after all results of the previous one has been collected for analysis.
+%Although a driver script can be as complicated as needed to cope with all the intricacies of a distributed setting, {\sc sqalpel} also provides a simple scheme to run experiments in parallel on multiple machines. It is denoted on the command line with a list of machines reachable using a {\sc ssh} connection with the users' credentials. Then all experiments are run in parallel lock-step mode over the ssh channels, i.e., all machines exercise the same experiment and a new experiment is only chosen after all results of the previous one has been collected for analysis.
 
 %Let D be the number of drivers to run experiments. Then a multiple of D host names is accepted as well. As long as there are queries ready for execution a pool of D hosts is assigned the task.
 
 \section{Sharing experiences}\label{sharing}
 In this section we present an overview of the {\sc sqalpel}
 architecture to define and manage performance projects. It addresses
-the second issue, i.e.\ improve sharing of database performance
+the second issue, i.e., improve sharing of database performance
 information. A problem that calls for both legal and technical
 solutions.
 
@@ -734,7 +737,7 @@ solutions.
 The starting point of the design for {\sc
 sqalpel} is to recognize that performance data only makes sense if
 you can easily document it and share it. 
-This immediately takes TPC benchmarking outside the realm of where it is used nowadays mostly, i.e.\ a
+This immediately takes TPC benchmarking outside the realm of where it is used mostly nowadays, i.e., a
   by-product to finalize a scientific paper to prove a point. Every
   database researcher has to partly re-run them on their novel system
   and compare it with an open-source DBMS.
@@ -751,14 +754,14 @@ others? Probably not always.
 However, we can greatly benefit from the insights of others who provide reports on generic or
 abstracted case studies that are close to our intended
 application. 
-Rather then making a performance project always public,  we should support 
+Rather than making a performance project always public,  we should support 
 collaborative teams as well.
 
 \subsection{Access control in SQALPEL}
 This leads to a clear distinction of the kinds of projects that {\sc
-  sqalpel} is designed to accommodate, i.e.\ public and/or private
+  sqalpel} is designed to accommodate, i.e., public and/or private
 ones, with access control.
-Much like how software projects are managed on Github. 
+Much like how software projects are managed on GitHub. 
 
 A performance project is
 initiated and owned by someone, the \emph{project leader}, who acts as
@@ -787,7 +790,7 @@ and host settings
 
 %Due to early intervenience of a vendor\cite{}, most End-User-Licences include a so-called "deWitt" clause.
 %In essence it binds the user to not tell anything about using the system to others. Sometimes constraining
-%it to a particular kind, e.g.\ don't tell to enable a comparison.
+%it to a particular kind, e.g., don't tell to enable a comparison.
 
 %Since the verdict in 2001 by the NewYork judge, such clauses can be considered a
 %violation of the freedom of speech. 
@@ -836,13 +839,13 @@ prior written approval
 
 We belief it is time to cast away the fear to publish experiences with
 commercial products for a consumer and research purpose.
-This does not mean one should bash a product, because this could lead to a lawsuit on damaging the vendors'
+This does not mean one should bash a product, because this could lead to a lawsuit on damaging the vendor's
 credentials. 
 %Instead, sharing should be based on scientific rigor
 %and aimed towards innovation~\cite{DBLP:conf/sigmod/RaasveldtHGM18}.
 %Most important, any implementation of a performance project calls for scientific rigor. 
 %In particular, the documentation of the DBMS knobs, the database
-%schema meta data, e.g.\ index use, partitioning, compression, the
+%schema meta data, e.g., index use, partitioning, compression, the
 %data distribution, just to name a few.
 
  Although users are free to bind themselves in such limiting
@@ -859,7 +862,7 @@ credentials.
 %pdfcomment{Panos: I propose we change the bold text in the two
 
 We believe that the open-source legal framework of
-Github\footnote{https://github.com/github/site-policy/}, backed by
+GitHub\footnote{https://github.com/github/site-policy/}, backed by
 the {\sc sqalpel} access control policies, strikes a balance between
 the need for public and confidential information. If a vendor believes
 a project infringes on their license, they can follow the \emph{notice
@@ -892,7 +895,7 @@ illegal. Content is removed by the host following notice.
 % \textbf{SQALPEL client} This component is run on each target system. It
 % connects with the server to obtain outstanding (or unfinished) tasks. It
 % translates this into a call to a local program to actually perform the task. The
-% client program can be used to shield sensitive information, e.g.\ method and
+% client program can be used to shield sensitive information, e.g., method and
 % authentication information to actually run the experiment. Upon completion of
 % the task, a REST call is made to the server to update the state. Each client is
 % free to determine where and how the task should be executed. The predominant
@@ -932,7 +935,7 @@ within a browser.
 
 \subsection{Top menu navigation}
 The top level menu is kept simple. A straightforward user
-administration is provided based on an unique nickname and a valid
+administration is provided based on a unique nickname and a valid
 email to reach out to its owner. Email addresses are never exposed in the interface; they
 are used for legal interaction with the registered user.
 %pdfcomment{Panos: exposed to whom? What legal interaction do you mean here?}
@@ -953,15 +956,15 @@ Once the anticipated DBMS and host are known, either an existing
 project is opened or a new one started. Its synopsis contains all
 information to repeat the experiments, provides proper attribution to
 the database generator developers, and marks the project as either
-public/ private. An experiment consists of a sample SQL query
+public or private. An experiment consists of a sample SQL query
 converted into a {\sc sqalpel} grammar (see Figure~\ref{fig:sqalpel}). In
 case the grammar produces too many semantic incorrect queries or leads
 to exorbitant large space, a manual edit of the grammar is called
-for, e.g. some alternatives can be removed by making join-paths
+for, e.g., some alternatives can be removed by making join-paths
 explicit.
 
 \subsection{Query pool}
-With the {\sc sqalpel} grammar in place we can switch to the query pool
+With the {\sc sqalpel} grammar in place, we can switch to the query pool
 (Figure~\ref{fig:querypool2}). It is initialized with the baseline
 query.
 %This way we always first get an overview of the traditional benchmark results. 
@@ -986,7 +989,7 @@ followed.
 %For this known dbms/host combination is chosen.
 Documentation of the settings used in the target system is critical
 for a proper interpretation. In particular DBMS server settings may
-have an effect on the performance, e.g.\ addition of indices without
+have an effect on the performance, e.g., addition of indices without
 reporting them would confuse others attempting to interpret the
 results.
 
@@ -997,7 +1000,7 @@ within a specified timeout interval.
 
 All raw results are collected in a results table for off-line
 inspection. One particular use case is to remove results from target
-systems that require a re-run, e.g.\ they are measured incorrectly. 
+systems that require a re-run, e.g., they are measured incorrectly. 
 It is often a better strategy to keep these results private until
 sufficient clarification has been obtained from the contributor.
 %The SQLprobe program continually picks up tasks until it is stopped by the contributor
@@ -1012,8 +1015,8 @@ with a few built-in visual analytics commands or exported in CSV for
 post-processing. Figure~\ref{fig:history} shows the execution time of
 queries in a single experiment. The dashed lines illustrate the
 morphing action taken. The color coding for alter, expand, and prune
-morphing is purple, green, and blue respectively. Queries that result
-in an error are shown as yellow dots. Note that they can be query morphed into
+morphing is purple, green, and blue, respectively. Queries that result
+in an error are shown as yellow dots. Note that they can be queries morphed into
 valid queries later on. The node size illustrates the number of
 %pdfcomment{Panos: Is the addition of the word "syntactic" correct in this context?} 
 components in the query. Hovering over a node shows the details of the run.
@@ -1045,7 +1048,7 @@ materialized intermediates.
 
 Relative speedup between different versions of a system can be
 directly visualized (Figure~\ref{fig:speedup2}). It should not come
-as a surprise that speedup factors of an individual query only tells
+as a surprise that a speedup factor of an individual query only tells
 part of the story. The figure shows that the base line query SF 1
 Q1
 %\pdfcomment{Panos: Again here either we should specifically say TPC-H scale factor 1, query 1, or write out the full query as an equation so that it can be referenced.}  
@@ -1074,7 +1077,7 @@ focus experimentation and engineering.
 
 %In this study we focused both on scalability, comparing the performance of MonetDB instances between SF-1 and SF-10. Both would comfortably fit in main memory and any divergence can be attributed to increased algorithmic complexity effects or cache behavior.
 
-%For example, Figure \ref{fig:sf1-10} illustrates a divergence map derived from running ZZ queries with a total execution time of ZZ seconds.It is based on the exhaustive morphing strategy. The same experiment with randomized query generation is shown in Figure ~\ref{fig:sf1-10b}. The number of invalid plans in the pool is ZZ and ZZ, respectively
+%For example, Figure~\ref{fig:sf1-10} illustrates a divergence map derived from running ZZ queries with a total execution time of ZZ seconds.It is based on the exhaustive morphing strategy. The same experiment with randomized query generation is shown in Figure ~\ref{fig:sf1-10b}. The number of invalid plans in the pool is ZZ and ZZ, respectively
 
 
 
@@ -1178,13 +1181,13 @@ focus experimentation and engineering.
 %The results and insight
 
 %\subsection{Clickhouse}
-%We have been given the opportunity to run the experiments reported by Clickhouse on their original data. The prime reason was to validate ~\footnote{The times for MonetDB relate to an ancient version, beginning of 2013} the reported performance on their website and to understand what queries in their application space caused the huge performance differences. The query set consists of just 43 queries picked randomly by hand from their application setting, i.e.\ web-log analysis.
+%We have been given the opportunity to run the experiments reported by Clickhouse on their original data. The prime reason was to validate ~\footnote{The times for MonetDB relate to an ancient version, beginning of 2013} the reported performance on their website and to understand what queries in their application space caused the huge performance differences. The query set consists of just 43 queries picked randomly by hand from their application setting, i.e., web-log analysis.
 
 %To challenge {\sc sqalpel} we simply combined all the queries into one big grammar. It already showed that the benchmark was using only 34 out of 104 columns of their database table. Furthermore, as few as 19 predicate terms where used to filter out records and 16 columns were used to group information.
 %The grammar analysis leads to 14K different query templates and the complete space of $> ~ 10 ^{22}$ different queries. If their choice of 43 queries properly represents this space remains to be seen. One observation in deploying it with {\sc sqalpel} showed that there are essentially two outstanding discriminative queries. In a hot database setting, MonetDB performs much better on point-queries, while it performed worst against Clickhouse when confronted by aggregation over a large number of small groups. Given the biased query distribution this results in a non-representative global comparison figure and provided insight on where to improve MonetDB.
 
 %\subsection{The real world}
-%Another driving example for {\sc sqalpel} was a problematic customer query. It was a typical BI query, generated by a front-end tool and heavily relying on expanding (inline) views. The result was a single SQL statement of $\sim$2K lines ($\sim$ 110 K characters), which included 68 subqueries, $>100$ (dis/con)junctive terms and much of the SQL functionality, i.e.\ group-by, order-by, case-expressions, window-based aggregates, casting, etc.
+%Another driving example for {\sc sqalpel} was a problematic customer query. It was a typical BI query, generated by a front-end tool and heavily relying on expanding (inline) views. The result was a single SQL statement of $\sim$2K lines ($\sim$ 110 K characters), which included 68 subqueries, $>100$ (dis/con)junctive terms and much of the SQL functionality, i.e., group-by, order-by, case-expressions, window-based aggregates, casting, etc.
 
 %The query complexity is large enough to make it hard for a human to identify what portion is detrimental to the performance. The {\sc sqalpel} parser
 %inferred a grammar with 992 rules, 685 literals, and >100K query templates. The
@@ -1214,11 +1217,11 @@ standing on the shoulders of giants.
 
 
 %future extensions
-%Possible directions of future research can be inspired by e.g.\ attribute grammars, where each production rule comes with a semantic part to control the generation of the final query. For example, to replace the literal tokens by context dependent values or iterators.
+%Possible directions of future research can be inspired by, e.g., attribute grammars, where each production rule comes with a semantic part to control the generation of the final query. For example, to replace the literal tokens by context dependent values or iterators.
 
 %SQALPEL could have been extended with a full semantic analysis of the SQL query. This however, would invalidate the primary focus. Furthermore, checking for invalid queries is a cheap operation. Morphing an erroneous query into a valid one also remains possible.
 
-%Although {\sc sqalpel} has been initially designed for database query performance analysis, its generality permits any other system comparison to be undertaken as well. Running queries from a search space can readily be replaced by running parameterized scripts to study e.g.\ database loading, database update workloads, messaging systems, compilers, HPC applications, and user interaction scenarios.
+%Although {\sc sqalpel} has been initially designed for database query performance analysis, its generality permits any other system comparison to be undertaken as well. Running queries from a search space can readily be replaced by running parameterized scripts to study, e.g., database loading, database update workloads, messaging systems, compilers, HPC applications, and user interaction scenarios.
 
 
 \subsection*{Acknowledgments} This research has received funding from the European Union's Horizon 2020 research and innovation programme under Grant Agreement no.~732366 (ACTiCLOUD).

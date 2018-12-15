@@ -30,6 +30,7 @@
 \usepackage{wrapfig}
 \setlength{\wrapoverhang}{0mm}
 
+\usepackage{xcolor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % pdfcomment for annotations.         %
@@ -37,6 +38,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% \usepackage[final]{pdfcomment}
 \usepackage{pdfcomment}
+
+% use this when using \usepackage[final]{pdfcomment}
+%% \newcommand{\highlight}[1]{#1}
+% use this when using \usepackage{pdfcomment}
+\newcommand{\highlight}[1]{\textcolor{red}{\underline{#1}}}
+
 
 %\newtheorem{theorem}{Theorem}
 %\newtheorem{lemma}[theorem]{Lemma}
@@ -219,7 +226,12 @@ is to find them for any pair of systems quickly.
 % Problem of sharing
 {\bf Performance repositories.}  The second hurdle of database
 benchmarking is the lack of easy reporting and sharing knowledge on
-experiments conducted publically. Something akin to a software repository for
+\highlight{experiments conducted publically}.
+\pdfcomment{Stefan:
+Are the experiments conducted publically as the text says,
+or shouls rather the reporting and sharing be public?
+}
+Something akin to a software repository for
 sharing code. A hurdle to include product results is the ``deWitt''
 clause in most end-user-license agreements, which seemingly prohibits
 publishing benchmark results for study and research, commentary, and
@@ -769,13 +781,23 @@ a moderator for quality assurance. Subsequently,
 \emph{contributors} are invited to run the experiments in their own DBMS context and share results.
 
 %\pdfcomment{Panos: What are the private host settings?}. 
-Otherwise, all relevant information is available in
+\highlight{Otherwise},
+\pdfcomment{Stefan:
+"Otherwise", i.e., if/when a performance project is not initiated and owned by someone?
+Or if/when no contributors are invited to run the experiments and share results??
+}
+all relevant information is available in
 read-only mode. The project owner is the moderator who can actively
 expand the query pool and manage visibility of the results. Registered users can
 leave comments on projects to improve upon the presentation, highlight
 issues, or suggest other experiments.
 
-On the other hand, a private project enables users to experiment with
+\highlight{On the other hand, a private project}
+\pdfcomment{Stefan:
+Do this mean the implicite "on the one hand" are the paragraphs above,
+and they talk about public project, without mentioning so explicitely??
+}
+enables users to experiment with
 proprietary database instances or products. For contributors the
 information shielding is lifted. They can provide results and
 inspect all results of the projects they belong to. There is no
